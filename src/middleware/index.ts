@@ -1,6 +1,7 @@
 import { get, merge } from 'lodash'
 import { NextFunction, Request, Response } from 'express'
 import { getUserBySessionToken } from '../db/users'
+import { ObjectId } from 'mongoose'
 
 export const isAuthenticated = async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -18,5 +19,25 @@ export const isAuthenticated = async (req: Request, res: Response, next: NextFun
     } catch (error) {
         console.log(error)
         return res.sendStatus(400)
+    }
+}
+
+export const isOwner = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const { id } = req.params;
+        console.log('id', id)
+
+        // verify account requested to be deleted is same as signed in user
+        const currentUserId = (get(req, 'identity._id') as ObjectId).toString()
+
+        if (!currentUserId) return res.sendStatus(400)
+
+        if (currentUserId !== id) return res.sendStatus(403)
+
+        next();
+
+    } catch (error) {
+        console.log(error)
+        res.sendStatus(400)
     }
 }

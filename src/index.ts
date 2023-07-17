@@ -35,8 +35,8 @@ mongoose.connection.on('connecting', () => {
 mongoose.connection.on('connected', () => {
     console.log('Succesfully connected to Mongoose')
 })
-mongoose.connection.on('error', (err: Error) => {
-    console.log(err)
+mongoose.connection.on('error', (error: Error) => {
+    console.log(error)
 })
 
 mongoose.connect(MONGO_URI);

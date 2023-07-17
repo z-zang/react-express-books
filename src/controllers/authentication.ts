@@ -5,20 +5,13 @@ import { random, authentication } from "../helpers"
 export const login = async (req: Request, res: Response) => {
     try {
         const { email, password } = req.body
-
-        console.log(email, password)
-        console.log('aaaa')
         if (!email || !password) return res.sendStatus(400);
 
         const user = await getUserByEmail(email).select('+authentication.salt +authentication.password');
-
-        console.log('user', user)
-
         if (!user) return res.sendStatus(400);
 
-        // authenticate user without knowing their email
+        // authenticate user without exposing sensitive information
         const expectedHash = authentication(user.authentication.salt, password)
-        console.log('expectedHash', expectedHash)
 
         if (user.authentication.password !== expectedHash) {
             res.sendStatus(403)
@@ -28,7 +21,6 @@ export const login = async (req: Request, res: Response) => {
         user.authentication.sessionToken = authentication(salt, user._id.toString())
 
         await user.save()
-
 
         res.cookie('goodreads-session', user.authentication.sessionToken, {
             domain: process.env.DOMAIN || 'localhost',
