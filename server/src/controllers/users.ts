@@ -14,6 +14,7 @@ export const getAllUsers = async (req: Request, res: Response) => {
 export const deleteUser = async (req: Request, res: Response) => {
     try {
         const { id } = req.params;
+        // todo: will also have to delete lists, history, reviews, unfriend 
         const deletedUser = await deleteUserById(id)
         if (!deletedUser) return res.sendStatus(400)
 

@@ -25,7 +25,6 @@ export const isAuthenticated = async (req: Request, res: Response, next: NextFun
 export const isOwner = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const { id } = req.params;
-        console.log('id', id)
 
         // verify account requested to be deleted is same as signed in user
         const currentUserId = (get(req, 'identity._id') as ObjectId).toString()

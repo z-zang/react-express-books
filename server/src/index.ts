@@ -9,6 +9,8 @@ import router from './router';
 
 const app = express()
 
+console.log('process.env', process.env)
+
 const PORT = process.env.PORT || 8081;
 const USERNAME = process.env.MONGO_USERNAME
 const PASSWORD = process.env.MONGO_PASSWORD
