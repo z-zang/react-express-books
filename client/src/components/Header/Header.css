@@ -1,0 +1,29 @@
+.headerWrapper {
+    text-align: center;
+}
+
+@component Header {
+    text-align: center;
+
+    @descendent header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        background-color: var(--dark-yellow);
+        height: 80px;
+        align-content: center;
+        flex-wrap: wrap;
+        text-align: center;
+
+    }
+
+    @descendent title {
+        font-size: 1.75em;
+        margin: 0;
+    }
+
+    @descendent searchBar {
+        font-size: 1.75em;
+        margin: 0;
+    }
+}

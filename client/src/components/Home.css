@@ -1,7 +1,0 @@
-@component Home {
-    border: 4px solid green;
-
-    @descendent element {
-        border: 4px solid green;
-    }
-}
