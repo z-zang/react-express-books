@@ -1,11 +1,15 @@
 import React from 'react'
+import BEMHelper from '../utils/BEMHelper'
+import './Home.css'
 
-// type Props = {}
-// props: Props
+const bem = new BEMHelper('Home')
 
 const Home = () => {
     return (
-        <div>Home</div>
+        <div className={bem('element', ['modifier1', 'modifier2'], 'customClassName')} >
+            Home
+
+        </div>
     )
 }
 
